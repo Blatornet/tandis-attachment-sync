@@ -3,10 +3,10 @@ const ipAllowed = ({ headers, response }) => {
   const ipFilter = process.env.IP_ADDRESS_ALLOWED;
 
   if (!ip || !ipFilter) {
-    console.log("### ip blocked: ", ip);
-    return response.status(400).send({ response: { status: 400, statusText: "Missing attachmentId" } });
+    console.log("### ip or filter missing: ", ip);
+    return response.status(400).send({ response: { status: 400, statusText: "Missing ip or ip-filter" } });
   } else {
-    console.log("### ip allowed: ", ip);
+    console.log("### ip filter run for: ", ip);
   }
 
   return ipFilter.includes(ip);
