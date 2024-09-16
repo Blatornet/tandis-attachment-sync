@@ -4,7 +4,7 @@ import uploadToS3Bucket from "@/utils/uploadToS3Bucket";
 
 export default async function GET(request, response) {
   // Check if IP is allowed
-  if (!ipAllowed(request.headers)) {
+  if (!ipAllowed({ headers: request.headers, response })) {
     return response.status(403).send({ response: { status: 403, statusText: "Forbidden" } });
   }
 

@@ -1,4 +1,4 @@
-const ipAllowed = (headers) => {
+const ipAllowed = ({ headers, reponse }) => {
   const ip = headers['x-real-ip'];
   const ipFilter = process.env.IP_ADDRESS_ALLOWED;
 
