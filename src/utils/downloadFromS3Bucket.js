@@ -18,21 +18,13 @@ const downloadFromS3Bucket = async ({ labId, orderId, attachmentId, filename }) 
       Key: `${labId}/${orderId}/${attachmentId}/${filename}`
     }));
 
-    //console.log("### response: ", response);
+    const fileArray = await response.Body.transformToByteArray();
+    const fileBuffer = await Buffer.from(fileArray);
 
-    //const file = await response.Body.transformToString();
-    //console.log("### file: ", file.length);
-
-    /*
-    transformToByteArray: ÄAsyncFunction: transformToByteArrayÅ,
-    transformToString: ÄAsyncFunction: transformToStringÅ,
-    transformToWebStream: 
-    */
-
-
-    return response;
+    return fileBuffer;
   } catch (error) {
-
+    console.log("### downloadFromS3Bucket error: ", error);
+    return null;
   }
 }
 

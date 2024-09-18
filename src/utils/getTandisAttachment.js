@@ -1,7 +1,7 @@
 import axios from "./axios.js";
 import getArsAccessToken from "./getArsAccessToken.js";
 
-const getTandisAttachment = async ({ attachmentId }) => {
+const getTandisAttachment = async ({ attachmentId, fetchAttachment = true }) => {
   console.log("### get attachment info: ", attachmentId);
   const accessToken = await getArsAccessToken();
 
@@ -32,7 +32,12 @@ const getTandisAttachment = async ({ attachmentId }) => {
     attachmentLabId: data?.IDLab,
     attachmentOrderId: data?.IDOrder,
     attachmentFile: data?.Attachment_File,
+    attachmentRequestId: data?.["Request ID"],
     attachmentFileData: null
+  }
+
+  if (!fetchAttachment) {
+    return attachment;
   }
 
   const href = data?.Attachment_File?.href?.replace("http", "https");
