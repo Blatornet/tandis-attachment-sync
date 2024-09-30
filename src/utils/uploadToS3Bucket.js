@@ -41,6 +41,8 @@ const uploadToS3Bucket = async ({ labId, orderId, attachmentId, filename, fileda
       })
     );
 
+    console.log("### upload result ", result);
+
     const statusCode = result.$metadata.httpStatusCode || 0;
 
     if (statusCode === 200) {
