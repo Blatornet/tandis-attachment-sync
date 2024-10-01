@@ -3,6 +3,8 @@ import downloadFromS3Bucket from "@/utils/downloadFromS3Bucket";
 import getTandisAttachment from "@/utils/getTandisAttachment";
 import updateTandisAttachment from "@/utils/updateTandisAttachment";
 
+export const maxDuration = 60;
+
 export default async function POST(request, response) {
   // Check if IP is allowed
   if (!ipAllowed({ headers: request.headers, response })) {
