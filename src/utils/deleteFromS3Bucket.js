@@ -2,12 +2,9 @@ import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const { AWS_S3_REGION, AWS_S3_ACCESS_KEY, AWS_S3_ACCESS_KEY_SECRET, AWS_S3_BUCKET_NAME } = process.env;
 
-const deleteFromS3Bucket = async ({ labId, orderId, attachmentId, filename }) => {
+const deleteFromS3Bucket = async ({ labId, attachmentId, filename }) => {
   if (!labId) {
     return { response: { status: 400, statusText: "No LabId provided" } };
-  }
-  if (!orderId) {
-    return { response: { status: 400, statusText: "No OrderId provided" } };
   }
   if (!attachmentId) {
     return { response: { status: 400, statusText: "No AttachmentId provided" } };
@@ -25,7 +22,7 @@ const deleteFromS3Bucket = async ({ labId, orderId, attachmentId, filename }) =>
       }
     });
 
-    const key = `${labId}/${orderId}/${attachmentId}/${filename}`;
+    const key = `${labId}/${attachmentId}/${filename}`;
 
     const result = await client.send(
       new DeleteObjectCommand({

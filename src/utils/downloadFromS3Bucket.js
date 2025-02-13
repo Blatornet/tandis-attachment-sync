@@ -2,8 +2,8 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 const { AWS_S3_REGION, AWS_S3_ACCESS_KEY, AWS_S3_ACCESS_KEY_SECRET, AWS_S3_BUCKET_NAME } = process.env;
 
-const downloadFromS3Bucket = async ({ labId, orderId, attachmentId, filename }) => {
-  console.log("### downloadFromS3Bucket: ", { labId, orderId, attachmentId, filename });
+const downloadFromS3Bucket = async ({ labId, attachmentId, filename }) => {
+  console.log("### downloadFromS3Bucket: ", { labId, attachmentId, filename });
   try {
     const client = new S3Client({
       region: AWS_S3_REGION,
@@ -15,7 +15,7 @@ const downloadFromS3Bucket = async ({ labId, orderId, attachmentId, filename }) 
 
     const response = await client.send(new GetObjectCommand({
       Bucket: AWS_S3_BUCKET_NAME,
-      Key: `${labId}/${orderId}/${attachmentId}/${filename}`
+      Key: `${labId}/${attachmentId}/${filename}`
     }));
 
     const fileArray = await response.Body.transformToByteArray();

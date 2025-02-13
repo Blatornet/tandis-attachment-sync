@@ -27,7 +27,6 @@ export default async function GET(request, response) {
   // Upload attachment to AWS S3
   const uploadStatus = await uploadToS3Bucket({
     labId: attachment.attachmentLabId,
-    orderId: attachment.attachmentOrderId,
     attachmentId: attachment.attachmentId,
     filename: attachment.attachmentName,
     filedata: attachment.attachmentFileData,

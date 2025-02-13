@@ -31,13 +31,11 @@ export default async function POST(request, response) {
 
   // Build AWS S3 key
   const labId = attachment.attachmentLabId;
-  const orderId = attachment.attachmentOrderId;
   const filename = attachment.attachmentName;
   const attachmentRequestID = attachment.attachmentRequestId;
-  const key = `/${labId}/${orderId}/${attachmentId}/${filename}`;
 
   // Download file from S3 bucket
-  let file = await downloadFromS3Bucket({ labId, orderId, attachmentId, filename });
+  let file = await downloadFromS3Bucket({ labId, attachmentId, filename });
   if (!file) {
     console.log("### file download failed: ", attachmentId);
     return response.status(404).send({ response: { status: 404, statusText: "File download failed" } });

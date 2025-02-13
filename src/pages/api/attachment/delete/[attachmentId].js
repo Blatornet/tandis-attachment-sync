@@ -28,11 +28,10 @@ export default async function POST(request, response) {
 
   // Build AWS S3 key
   const labId = attachment.attachmentLabId;
-  const orderId = attachment.attachmentOrderId;
   const filename = attachment.attachmentName;
 
   // Delete file from S3 bucket
-  let deleteResult = await deleteFromS3Bucket({ labId, orderId, attachmentId, filename });
+  let deleteResult = await deleteFromS3Bucket({ labId, attachmentId, filename });
   if (!deleteResult) {
     console.log("### file delete failed: ", attachmentId);
     return response.status(404).send({ response: { status: 404, statusText: "File delete failed" } });

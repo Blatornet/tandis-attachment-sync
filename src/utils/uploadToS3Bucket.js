@@ -2,12 +2,9 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const { AWS_S3_REGION, AWS_S3_ACCESS_KEY, AWS_S3_ACCESS_KEY_SECRET, AWS_S3_BUCKET_NAME } = process.env;
 
-const uploadToS3Bucket = async ({ labId, orderId, attachmentId, filename, filedata }) => {
+const uploadToS3Bucket = async ({ labId, attachmentId, filename, filedata }) => {
   if (!labId) {
     return { response: { status: 400, statusText: "No LabId provided" } };
-  }
-  if (!orderId) {
-    return { response: { status: 400, statusText: "No OrderId provided" } };
   }
   if (!attachmentId) {
     return { response: { status: 400, statusText: "No AttachmentId provided" } };
@@ -31,7 +28,7 @@ const uploadToS3Bucket = async ({ labId, orderId, attachmentId, filename, fileda
       }
     });
 
-    const key = `${labId}/${orderId}/${attachmentId}/${filename}`;
+    const key = `${labId}/${attachmentId}/${filename}`;
 
     const result = await client.send(
       new PutObjectCommand({
