@@ -1,6 +1,6 @@
 {
   "name": "tandis-attachment-sync",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sync order attachments to AWS S3",
   "scripts": {
     "dev": "next dev",
